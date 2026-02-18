@@ -1,10 +1,11 @@
 # geopulse-web
-What it is
 
-Tech stack
+#What it is
 
-How to run locally
+#Tech stack
 
-Repo structure
+#How to run locally
 
-Roadmap
+#Repo structure
+
+#Roadmap
