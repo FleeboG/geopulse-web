@@ -1,0 +1,29 @@
+name: web-ci
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node (no npm cache until package.json exists)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install, lint, test, build (auto-skips until package.json exists)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run lint --if-present
+            npm run typecheck --if-present
+            npm run test --if-present
+            npm run build
+          else
+            echo "package.json not found yet — skipping Node build (will run once React app is added)"
+          fi
